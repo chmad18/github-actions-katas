@@ -58,7 +58,7 @@ jobs:
       - run: export GIT_COMMIT="GA-$GITHUB_SHA" && ci/build-docker.sh
       - run: export GIT_COMMIT="GA-$GITHUB_SHA" && ci/push-docker.sh
   Component-test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: Docker-image
     steps:
       - name: Download art
