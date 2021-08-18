@@ -52,6 +52,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: Build-artifact
+          path: .
       - run: export GIT_COMMIT="GA-$GITHUB_SHA"
       - run: chmod +x ci/build-docker.sh 
       - run: chmod +x ci/push-docker.sh
