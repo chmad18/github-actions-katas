@@ -66,5 +66,5 @@ jobs:
         with:
           name: Build-artifact
           path: .
-      - run: chmod +x ci/component-test.sh
+      - run: export GIT_COMMIT="GA-$GITHUB_SHA" && chmod +x ci/component-test.sh
       - run: ci/component-test.sh
