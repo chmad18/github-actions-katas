@@ -32,15 +32,17 @@ jobs:
     container: gradle:6-jdk11
     needs: Clone-down
     steps:
+      - name: donwload
+          uses: actions/download-artifact@v2
+          with:
+            name: my-artifact
+      - run: chmod +x build-app.sh
+      - run: build-app.sh
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
           name: Build-artifact
           path: .
-      - name: donwload
-        uses: actions/download-artifact@v2
-        with:
-          name: my-artifact
   Docker-image:
     runs-on: ubuntu-latest
     container: gradle:6-jdk11
@@ -50,4 +52,8 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: Build-artifact
-      - run: chmod +x ci/build-docker.sh && chmod +x ci/push-docker.sh && ci/build-docker.sh && ci/push-docker.sh && export GIT_COMMIT="GA-$GITHUB_SHA"
+      - run: export GIT_COMMIT="GA-$GITHUB_SHA"
+      - run: chmod +x ci/build-docker.sh 
+      - run: chmod +x ci/push-docker.sh
+      - run: ci/build-docker.sh
+      - run: ci/push-docker.sh
